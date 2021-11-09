@@ -2,9 +2,6 @@
 {
     public class Employee
     {
-        /// <summary>
-        /// 
-        /// </summary>
         public int Id { get; set; }
 
         //[Key]
