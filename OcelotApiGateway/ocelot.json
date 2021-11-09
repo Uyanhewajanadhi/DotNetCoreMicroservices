@@ -2,7 +2,7 @@
   "Routes": [
     {
 
-      "DownstreamPathTemplate": "/api/employees",
+      "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -10,12 +10,14 @@
           "Port": 44354
         }
       ],
-      "UpstreamPathTemplate": "/EmployeeService",
+      "UpstreamPathTemplate": "/users/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     },
+
+
     {
 
-      "DownstreamPathTemplate": "/api/products/{Id}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -23,8 +25,9 @@
           "Port": 44382
         }
       ],
-      "UpstreamPathTemplate": "/ProductService/{Id}",
+      "UpstreamPathTemplate": "/products/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     }
+
   ]
 }

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ProductService.Database;
+using UserService.Database;
 
-namespace ProductService.Migrations
+namespace UserService.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
     [Migration("20211104083632_Initial")]

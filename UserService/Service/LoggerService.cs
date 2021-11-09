@@ -1,6 +1,6 @@
 ﻿using NLog;
-using UserService.Contracts;
 using System.Text.Json;
+using UserService.Contracts;
 
 namespace UserService.Services
 {

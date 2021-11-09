@@ -9,7 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UserService.Contracts;
 using UserService.Database;
+using UserService.Services;
 
 namespace UserService
 {
@@ -33,6 +35,8 @@ namespace UserService
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSingleton<ILoggerService, LoggerService>();
 
             services.AddControllers(); //AddControllers
         }

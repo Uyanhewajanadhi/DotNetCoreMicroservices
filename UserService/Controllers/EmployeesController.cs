@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using UserService.Contracts;
 using UserService.Database;
 
 namespace UserService.Controllers
@@ -13,17 +12,22 @@ namespace UserService.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
+        private readonly ILoggerService _logger;
+
         private readonly DatabaseContext _context;
 
-        public EmployeesController(DatabaseContext context)
+        public EmployeesController(DatabaseContext context, ILoggerService logger)
         {
+
             _context = context;
+            _logger = logger;
         }
 
         // GET: api/Employees
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee()
         {
+            _logger.LogInfo("Accessed Employee Controller");
             return await _context.Employee.ToListAsync();
         }
 
@@ -38,12 +42,11 @@ namespace UserService.Controllers
                 return NotFound();
             }
 
+            _logger.LogInfo("Accessed Employee Controller - ", employee);
+
             return employee;
         }
 
-        // PUT: api/Employees/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployee(int id, Employee employee)
         {
@@ -69,13 +72,10 @@ namespace UserService.Controllers
                     throw;
                 }
             }
-
+            _logger.LogDebug("Got a value");
             return NoContent();
         }
 
-        // POST: api/Employees
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
         {
@@ -98,6 +98,7 @@ namespace UserService.Controllers
             _context.Employee.Remove(employee);
             await _context.SaveChangesAsync();
 
+            _logger.LogWarn("A warning");
             return employee;
         }
 
